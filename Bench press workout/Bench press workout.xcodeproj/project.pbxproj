@@ -11,6 +11,7 @@
 		928DB6E52A5812E000FF4238 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB6E42A5812E000FF4238 /* ContentView.swift */; };
 		928DB6E72A5812E200FF4238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 928DB6E62A5812E200FF4238 /* Assets.xcassets */; };
 		928DB6EA2A5812E200FF4238 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 928DB6E92A5812E200FF4238 /* Preview Assets.xcassets */; };
+		928DB6F12A58632800FF4238 /* NothingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB6F02A58632800FF4238 /* NothingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		928DB6E42A5812E000FF4238 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		928DB6E62A5812E200FF4238 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		928DB6E92A5812E200FF4238 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		928DB6F02A58632800FF4238 /* NothingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				928DB6E22A5812E000FF4238 /* Bench_press_workoutApp.swift */,
 				928DB6E42A5812E000FF4238 /* ContentView.swift */,
+				928DB6F02A58632800FF4238 /* NothingView.swift */,
 				928DB6E62A5812E200FF4238 /* Assets.xcassets */,
 				928DB6E82A5812E200FF4238 /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				928DB6E52A5812E000FF4238 /* ContentView.swift in Sources */,
+				928DB6F12A58632800FF4238 /* NothingView.swift in Sources */,
 				928DB6E32A5812E000FF4238 /* Bench_press_workoutApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
