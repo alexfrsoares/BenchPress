@@ -1,15 +1,13 @@
 //
-//  OnboardingView.swift
+//  OnboardingStepLandscapeView.swift
 //  Bench press workout
 //
-//  Created by Alex Freitas on 08/07/2023.
+//  Created by Alex Freitas on 09/07/2023.
 //
 
 import SwiftUI
 
-struct OnboardingView: View {
-    @StateObject var viewModel: OnboardingViewModel = OnboardingViewModel()
-    @State var onboardingSteps: [OnboardingStep] = OnboardingStep.stepSamples
+struct OnboardingStepLandscapeView: View {
     var step = OnboardingStep.stepSample
 
     var body: some View {
@@ -17,18 +15,18 @@ struct OnboardingView: View {
             let screenWidth = proxy.size.width
             let screenHeight = proxy.size.height
 
-            VStack(alignment: .center) {
+            HStack(alignment: .center) {
 
                 Spacer()
 
                 Image(step.imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: screenWidth * 0.7)
+                    .frame(height: screenHeight * 0.6)
 
                 Spacer()
 
-                Group {
+                VStack {
                     Text(step.name)
                         .font(.system(size: 26))
                         .fontWeight(.bold)
@@ -40,18 +38,18 @@ struct OnboardingView: View {
                         .padding(.horizontal)
                 }
                 .multilineTextAlignment(.center)
-                .frame(width: screenWidth * 0.8)
+                .frame(width: screenWidth * 0.6)
 
                 Spacer()
             }
-            .frame(width: screenWidth)
+            .frame(height: screenHeight)
         }
-        .background(Color("Green onboarding bg"))
+        .background(AppColors.onboardingBg)
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
+struct OnboardingStepHorizontalView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingStepLandscapeView()
     }
 }
