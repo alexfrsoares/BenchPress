@@ -21,6 +21,7 @@
 		928DB7022A5A3EE600FF4238 /* DeviceRotationViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7012A5A3EE600FF4238 /* DeviceRotationViewModifier.swift */; };
 		928DB7042A5A3F0F00FF4238 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7032A5A3F0F00FF4238 /* Extensions.swift */; };
 		928DB7072A5A40C000FF4238 /* OnboardingStepLandscapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7062A5A40C000FF4238 /* OnboardingStepLandscapeView.swift */; };
+		928DB7092A5A45BF00FF4238 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7082A5A45BF00FF4238 /* Exercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		928DB7012A5A3EE600FF4238 /* DeviceRotationViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRotationViewModifier.swift; sourceTree = "<group>"; };
 		928DB7032A5A3F0F00FF4238 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		928DB7062A5A40C000FF4238 /* OnboardingStepLandscapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepLandscapeView.swift; sourceTree = "<group>"; };
+		928DB7082A5A45BF00FF4238 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				928DB6F72A59D58200FF4238 /* OnboardingStep.swift */,
+				928DB7082A5A45BF00FF4238 /* Exercise.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 			files = (
 				928DB7002A5A3A4000FF4238 /* AppColors.swift in Sources */,
 				928DB7072A5A40C000FF4238 /* OnboardingStepLandscapeView.swift in Sources */,
+				928DB7092A5A45BF00FF4238 /* Exercise.swift in Sources */,
 				928DB6F82A59D58200FF4238 /* OnboardingStep.swift in Sources */,
 				928DB6F52A59AD0800FF4238 /* OnboardingViewModel.swift in Sources */,
 				928DB6FA2A59F63700FF4238 /* OnboardingStepPortraitView.swift in Sources */,
