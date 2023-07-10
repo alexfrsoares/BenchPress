@@ -1,5 +1,5 @@
 //
-//  OnboardingStepPortraitView.swift
+//  OnboardingStepView.swift
 //  Bench press workout
 //
 //  Created by Alex Freitas on 08/07/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnboardingStepPortraitView: View {
+struct OnboardingStepView: View {
     var step = OnboardingStep.stepSample
     
     var body: some View {
@@ -49,6 +49,6 @@ struct OnboardingStepPortraitView: View {
 
 struct OnboardingStepView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingStepPortraitView()
+        OnboardingStepView()
     }
 }

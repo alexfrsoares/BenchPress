@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
-    @StateObject var viewModel: OnboardingViewModel = OnboardingViewModel()
+    @StateObject var viewModel = OnboardingViewModel()
 //    @State private var orientation = UIDeviceOrientation.unknown
     @State var steps: [OnboardingStep] = OnboardingStep.stepSamples
 
@@ -21,7 +21,7 @@ struct OnboardingView: View {
                 TabView(selection: $viewModel.currentIndex) {
                     ForEach(Array(zip(steps.indices, steps)), id: \.0) { index, step in
 
-                        OnboardingStepPortraitView(step: step)
+                        OnboardingStepView(step: step)
                             .tag(index)
 
 //                        if orientation.isPortrait {
