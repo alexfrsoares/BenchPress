@@ -39,16 +39,18 @@ extension ExerciseView {
         }
 
         func gotoTheNextStep() {
-            withAnimation {
+//            withAnimation {
                 if self.currentIndex == self.steps.count - 1 {
                     print("This is the exercise's end")
                 } else {
                     self.currentIndex += 1
-                    // updating before animation
-                    self.updateStepProperties()
-                    self.updatePhaseProperties()
                 }
-            }
+//            }
+        }
+
+        func stepChanged() {
+            updateStepProperties()
+            updatePhaseProperties()
         }
 
         func updateStepProperties() {

@@ -10,6 +10,7 @@ import SwiftUI
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
     @State var exercise: Exercise = Exercise.exerciseSample
+    @State var currentIndex = 0
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
@@ -39,14 +40,14 @@ struct ExerciseView: View {
                 .onAppear {
                     viewModel.setExerciseProperties(exercise: exercise)
                 }
-                .onChange(of: viewModel.currentIndex) { newValue in
-                    print(newValue)
+                .onChange(of: viewModel.currentIndex) { _ in
+                    withAnimation {
+                        viewModel.stepChanged()
+                    }
                 }
 
                 Button(action: {
                     viewModel.gotoTheNextStep()
-//                    viewModel.updateStepProperties()
-//                    viewModel.updatePhaseProperties()
                 }, label: {
                     ContinueButtonView(description: $viewModel.buttonDescription)
                         .padding()
