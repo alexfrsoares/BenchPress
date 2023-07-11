@@ -42,11 +42,7 @@ struct NothingView: View {
         .opacity(0.7)
     }
 
-    private var stepsOverlay: some View {
-        Rectangle()
-            .foregroundColor(Color("Darker gray"))
-        .opacity(0.9)
-    }
+    
 }
 
 struct NothingView_Previews: PreviewProvider {

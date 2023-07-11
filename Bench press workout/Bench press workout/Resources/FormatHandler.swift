@@ -20,16 +20,16 @@ struct FormatHandler {
 
         let hours = timeInSeconds / 3600
         let minutes = (timeInSeconds % 3600) / 60
-        // let seconds = (inSeconds % 3600) % 60
+         let seconds = (timeInSeconds % 3600) % 60
 
         if hours == 0 && minutes == 0 {
-            return "\(minutes)min"
+            return String(format: "%02d:%02d", minutes, seconds)
         } else if hours == 0 {
-            return "\(minutes)min"
+            return String(format: "%02d:%02d", minutes, seconds)
         } else if minutes == 0 {
-            return "\(hours)h"
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         } else {
-            return "\(hours)h\(minutes)min"
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         }
     }
 }

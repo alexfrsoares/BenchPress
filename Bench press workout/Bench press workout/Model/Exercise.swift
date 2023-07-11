@@ -30,7 +30,7 @@ struct Exercise {
     static let exerciseSample = Exercise(
         name: "Bench Press (1RM)",
         repetitions: 4,
-        imageName: "press2"
+        imageName: AppImageStrings.benchPressHeavy
     )
 }
 

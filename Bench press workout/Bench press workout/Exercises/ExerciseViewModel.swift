@@ -7,21 +7,75 @@
 
 import SwiftUI
 
+extension Notification.Name {
+    static let startStepTimer = Notification.Name.init("StartStepTimer")
+}
+
 extension ExerciseView {
     @MainActor class ExerciseViewModel: ObservableObject {
-        @Published var currentIndex = 0
+        var name = ""
+        var repetitions = 0
+        var imageName = ""
+        var steps: [ExerciseStep] = []
 
-        func gotoTheNextStep(totalSteps: Int) {
+        @Published var currentIndex = 0
+        @Published var currentPhase: ExercisePhase = .warmup
+        @Published var stepInform = ""
+        @Published var stepAdvice = ""
+        @Published var remainingAttempts = 0
+        @Published var buttonDescription = ""
+        @Published var remainingAttemptsReminder = ""
+        @Published var currentTimer = 0
+
+        func setExerciseProperties(exercise: Exercise) {
+            self.name = exercise.name
+            self.repetitions = exercise.repetitions
+            self.imageName = exercise.imageName
+            self.steps = exercise.steps
+
+            self.remainingAttempts = repetitions
+            self.updateStepProperties()
+            self.updatePhaseProperties()
+        }
+
+        func gotoTheNextStep() {
             withAnimation {
-                if self.currentIndex == totalSteps - 1 {
-                    print("This is the onboarding's end")
+                if self.currentIndex == self.steps.count - 1 {
+                    print("This is the exercise's end")
                 } else {
-                    if self.currentIndex == totalSteps - 2 {
-//                        self.buttonDescription = "Let's Squat"
-                    }
                     self.currentIndex += 1
+                    // updating before animation
+                    self.updateStepProperties()
+                    self.updatePhaseProperties()
                 }
             }
+        }
+
+        func updateStepProperties() {
+            self.currentTimer = steps[currentIndex].time
+            self.stepInform = steps[currentIndex].inform
+            self.stepAdvice = steps[currentIndex].advice
+        }
+
+        func updatePhaseProperties() {
+            self.currentPhase = steps[currentIndex].phase
+
+            switch currentPhase {
+                case .warmup:
+                    self.buttonDescription = "Start testing"
+                case .attempt:
+                    self.buttonDescription = "Done"
+                case .rest:
+                    self.buttonDescription = "Finish measurement"
+                    if self.remainingAttempts > 0 {
+                        self.remainingAttempts -= 1
+                        self.updateRemainingAttemptsReminder()
+                    }
+            }
+        }
+
+        func updateRemainingAttemptsReminder() {
+            self.remainingAttemptsReminder = "You still have \(remainingAttempts)/\(repetitions) attempts"
         }
     }
 }

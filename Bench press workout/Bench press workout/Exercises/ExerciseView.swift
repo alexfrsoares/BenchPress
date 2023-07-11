@@ -10,37 +10,63 @@ import SwiftUI
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
     @State var exercise: Exercise = Exercise.exerciseSample
-    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     var body: some View {
         GeometryReader { proxy in
             VStack {
                 TabView(selection: $viewModel.currentIndex) {
                     ForEach(
-                        Array(zip(exercise.steps.indices, exercise.steps)),
+                        Array(zip(viewModel.steps.indices, viewModel.steps)),
                         id: \.0
                     ) { index, step in
                         VStack {
-                            Text("STEP \(index)")
-                            Text(exercise.name)
-                            Text(step.phase.rawValue)
-                            if step.phase == .warmup {
-                                Text("TIMER HERE")
-                            } else if step.phase == .attempt {
-                                Image(exercise.imageName)
-                            } else if step.phase == . rest {
-                                Text("TIMER HERE")
-                            }
+                            ExerciseStepView(exerciseName: viewModel.name,
+                                             repetitions: viewModel.repetitions,
+                                             exerciseImage: viewModel.imageName,
+                                             attempt: $viewModel.remainingAttempts,
+                                             phase: $viewModel.currentPhase,
+                                             inform: $viewModel.stepInform,
+                                             advice: $viewModel.stepAdvice,
+                                             stepTime: $viewModel.currentTimer,
+                                             reminder: $viewModel.remainingAttemptsReminder)
+                                .tag(index)
                         }
                     }
                 }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .tabViewStyle(PageTabViewStyle())
+                .onAppear {
+                    viewModel.setExerciseProperties(exercise: exercise)
+                }
+                .onChange(of: viewModel.currentIndex) { newValue in
+                    print(newValue)
+                }
 
                 Button(action: {
-                    viewModel.gotoTheNextStep(totalSteps: exercise.steps.count)
+                    viewModel.gotoTheNextStep()
+//                    viewModel.updateStepProperties()
+//                    viewModel.updatePhaseProperties()
                 }, label: {
-                    Text("BUTTON NEXT")
+                    ContinueButtonView(description: $viewModel.buttonDescription)
+                        .padding()
                 })
             }
         }
+        .background {
+            AppImages.stepScreenBg
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+                .overlay(stepsOverlay)
+        }
+    }
+
+    var stepsOverlay: some View {
+        Rectangle()
+            .foregroundColor(AppColors.exerciseBg)
+            .opacity(0.9)
+            .ignoresSafeArea()
     }
 }
 
