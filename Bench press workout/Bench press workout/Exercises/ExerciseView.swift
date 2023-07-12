@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
-    @State var currentPage: Int = 0
 
     var body: some View {
         GeometryReader { proxy in
@@ -17,7 +16,7 @@ struct ExerciseView: View {
             let screenHeight = proxy.size.height
 
             VStack {
-                TabView(selection: $currentPage) {
+                TabView(selection: $viewModel.currentStep) {
                     ForEach(
                         0..<viewModel.steps.count,
                         id: \.self
@@ -37,20 +36,21 @@ struct ExerciseView: View {
                                 .foregroundColor(.white)
                                 .padding(.bottom, screenHeight * 0.016)
                             
-                            ExerciseStepView(attemptMessage: viewModel.getAttemptMessage(stepIndex: index),
-                                             exerciseImage: viewModel.exerciseImageName,
-                                             phase: viewModel.getExercisePhase(stepIndex: index),
-                                             inform: viewModel.getStepInform(stepIndex: index),
-                                             advice: viewModel.getStepAdvice(stepIndex: index),
-                                             stepTime: viewModel.getStepTotalTime(stepIndex: index),
-                                             reminder: viewModel.getRemainingAttemptsMessage(stepIndex: index),
-                                             onTimerFinished: {
-                                                currentPage = viewModel.buttonTapped(at: currentPage)
-                                             })
+                            ExerciseStepView(
+                                attemptMessage: viewModel.getAttemptMessage(stepIndex: index),
+                                exerciseImage: viewModel.exerciseImageName,
+                                phase: viewModel.getExercisePhase(stepIndex: index),
+                                inform: viewModel.getStepInform(stepIndex: index),
+                                advice: viewModel.getStepAdvice(stepIndex: index),
+                                stepTime: viewModel.getStepTotalTime(stepIndex: index),
+                                reminder: viewModel.getRemainingAttemptsMessage(stepIndex: index),
+                                onTimerFinished: {
+                                    viewModel.timerFinished()
+                                })
                                 .tag(index)
 
                             Button(action: {
-                                currentPage = viewModel.buttonTapped(at: currentPage)
+                                viewModel.buttonTapped()
                             }, label: {
                                 ContinueButtonView(description: $viewModel.buttonDescription)
                                     .padding()
@@ -58,15 +58,15 @@ struct ExerciseView: View {
                         }
                     }
                 }
-                .animation(.easeInOut, value: currentPage)
+                .animation(.easeInOut, value: viewModel.currentStep)
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .tabViewStyle(PageTabViewStyle())
                 .onAppear {
                     viewModel.setExerciseProperties()
                 }
-                .onChange(of: currentPage) { _ in
+                .onChange(of: viewModel.currentStep) { _ in
                     withAnimation {
-                        viewModel.stepChanged(to: currentPage)
+                        viewModel.stepChanged()
                     }
                 }
             }

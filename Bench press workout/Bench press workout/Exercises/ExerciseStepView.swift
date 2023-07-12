@@ -47,13 +47,6 @@ struct ExerciseStepView: View {
                 Spacer()
             }
             .frame(width: screenWidth, height: screenHeight)
-            .onAppear() {
-                printPhase(phase: phase)
-            }
         }
-    }
-
-    func printPhase(phase: ExercisePhase) {
-        print("carregou \(phase)")
     }
 }

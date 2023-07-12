@@ -31,7 +31,7 @@ extension ExerciseView {
 
         func setExerciseProperties() {
             setAttemptInformations()
-            updateButtonLabel(currentPage: 0)
+            updateButtonLabel()
         }
 
         func setAttemptInformations() {
@@ -98,28 +98,32 @@ extension ExerciseView {
             return message
         }
 
-        func buttonTapped(at step: Int) -> Int {
+        func buttonTapped() {
+            gotoNextstep()
+        }
+
+        func timerFinished() {
+            gotoNextstep()
+        }
+
+        private func gotoNextstep() {
             var move = 0
-                if step == steps.count - 1 {
-                    move -= step
+                if currentStep == steps.count - 1 {
+                    move -= currentStep
                     print("This is the exercise's end")
                 } else {
                     move = 1
                 }
 
-            return step + move
+            currentStep += move
         }
 
-        func timerFinished(step: Int) {
-
+        func stepChanged() {
+            updateButtonLabel()
         }
 
-        func stepChanged(to page: Int) {
-            updateButtonLabel(currentPage: page)
-        }
-
-        func updateButtonLabel(currentPage: Int) {
-            let currentPhase = steps[currentPage].phase
+        func updateButtonLabel() {
+            let currentPhase = steps[currentStep].phase
 
             switch currentPhase {
                 case .warmup:
