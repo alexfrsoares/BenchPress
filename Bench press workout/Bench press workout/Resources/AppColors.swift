@@ -10,4 +10,5 @@ import SwiftUI
 struct AppColors {
     static let onboardingBg = Color("Green onboarding bg")
     static let button = Color("Green step button")
+    static let exerciseBg = Color("Darker gray")
 }
