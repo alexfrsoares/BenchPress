@@ -28,7 +28,7 @@
 		928DB7122A5B813100FF4238 /* ExerciseStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7112A5B813100FF4238 /* ExerciseStepView.swift */; };
 		928DB7142A5C157300FF4238 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928DB7132A5C157300FF4238 /* AppImages.swift */; };
 		92EB926F2A5ECA8A00FCCF96 /* Exercise+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB926E2A5ECA8A00FCCF96 /* Exercise+Mock.swift */; };
-		92EB92722A5EFF0100FCCF96 /* AssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB92712A5EFF0100FCCF96 /* AssessmentView.swift */; };
+		92EB92722A5EFF0100FCCF96 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB92712A5EFF0100FCCF96 /* MeasurementView.swift */; };
 		92EB92742A5EFF1400FCCF96 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB92732A5EFF1400FCCF96 /* ResultsView.swift */; };
 		92FE94022A5C46DB00070850 /* ExerciseWarmupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE94012A5C46DB00070850 /* ExerciseWarmupView.swift */; };
 		92FE94042A5C480100070850 /* ExerciseAttemptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE94032A5C480100070850 /* ExerciseAttemptView.swift */; };
@@ -58,7 +58,7 @@
 		928DB7112A5B813100FF4238 /* ExerciseStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseStepView.swift; sourceTree = "<group>"; };
 		928DB7132A5C157300FF4238 /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		92EB926E2A5ECA8A00FCCF96 /* Exercise+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Exercise+Mock.swift"; sourceTree = "<group>"; };
-		92EB92712A5EFF0100FCCF96 /* AssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentView.swift; sourceTree = "<group>"; };
+		92EB92712A5EFF0100FCCF96 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
 		92EB92732A5EFF1400FCCF96 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		92FE94012A5C46DB00070850 /* ExerciseWarmupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseWarmupView.swift; sourceTree = "<group>"; };
 		92FE94032A5C480100070850 /* ExerciseAttemptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseAttemptView.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 				928DB6F02A58632800FF4238 /* NothingView.swift */,
 				928DB7052A5A405900FF4238 /* Onboarding */,
 				928DB70C2A5B80B200FF4238 /* Exercises */,
-				92EB92702A5EFEE600FCCF96 /* Reaction */,
+				92EB92702A5EFEE600FCCF96 /* Results */,
 				928DB6F62A59D56C00FF4238 /* Model */,
 				928DB6FB2A5A2F1D00FF4238 /* Components */,
 				928DB6FE2A5A3A3000FF4238 /* Resources */,
@@ -172,13 +172,13 @@
 			path = Exercises;
 			sourceTree = "<group>";
 		};
-		92EB92702A5EFEE600FCCF96 /* Reaction */ = {
+		92EB92702A5EFEE600FCCF96 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				92EB92712A5EFF0100FCCF96 /* AssessmentView.swift */,
+				92EB92712A5EFF0100FCCF96 /* MeasurementView.swift */,
 				92EB92732A5EFF1400FCCF96 /* ResultsView.swift */,
 			);
-			path = Reaction;
+			path = Results;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +266,7 @@
 				928DB6E52A5812E000FF4238 /* ContentView.swift in Sources */,
 				928DB7122A5B813100FF4238 /* ExerciseStepView.swift in Sources */,
 				928DB6F32A59ACEA00FF4238 /* OnboardingView.swift in Sources */,
-				92EB92722A5EFF0100FCCF96 /* AssessmentView.swift in Sources */,
+				92EB92722A5EFF0100FCCF96 /* MeasurementView.swift in Sources */,
 				928DB6FD2A5A2F3F00FF4238 /* ContinueButtonView.swift in Sources */,
 				928DB70E2A5B80E100FF4238 /* ExerciseView.swift in Sources */,
 				928DB70B2A5B7FF300FF4238 /* FormatHandler.swift in Sources */,
