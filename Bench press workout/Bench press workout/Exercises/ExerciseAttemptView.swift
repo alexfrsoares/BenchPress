@@ -17,9 +17,9 @@ struct ExerciseAttemptView: View {
             let screenWidth = proxy.size.width
             let screenHeight = proxy.size.height
 
-            VStack {
+            VStack(alignment: .center) {
                 Text("\(phaseName) **\(attemptMessage)**")
-                    .font(.system(size: screenHeight * 0.042))
+                    .font(.system(size: screenHeight * 0.06))
                     .textCase(.uppercase)
                     .foregroundColor(.white)
                     .padding(.bottom, screenHeight * 0.08)
@@ -27,8 +27,20 @@ struct ExerciseAttemptView: View {
                 Image(exerciseImage)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: screenWidth * 0.75)
+
+                Spacer()
             }
+            .frame(width: screenWidth, height: screenHeight)
         }
+    }
+}
+
+struct ExerciseAttemptView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExerciseAttemptView(
+            phaseName: "Attempt",
+            attemptMessage: "7/10",
+            exerciseImage: "press")
+        .background(.gray)
     }
 }

@@ -20,16 +20,16 @@ struct ExerciseWarmupView: View {
             let screenWidth = proxy.size.width
             let screenHeight = proxy.size.height
 
-            VStack {
+            VStack(alignment: .center) {
                 Text(name)
-                    .font(.system(size: screenHeight * 0.042))
+                    .font(.system(size: screenHeight * 0.06))
                     .textCase(.uppercase)
                     .foregroundColor(.white)
-                    .padding(.bottom, screenHeight * 0.08)
+                    .padding(.bottom, screenHeight * 0.16)
 
                 Text(FormatHandler.time(seconds: countdownTimer))
-                    .font(.system(size: screenHeight * 0.1))
-                    .textCase(.uppercase)
+                    .font(.system(size: screenHeight * 0.14))
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.bottom)
                     .onReceive(timer) { _ in
@@ -41,11 +41,13 @@ struct ExerciseWarmupView: View {
                     }
 
                 Text(advice)
-                    .font(.system(size: screenHeight * 0.042))
+                    .font(.system(size: screenHeight * 0.04))
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                    .padding(.bottom, screenHeight * 0.08)
+
+                Spacer()
             }
-            .frame(width: screenWidth)
+            .frame(width: screenWidth, height: screenHeight)
             .onAppear() {
 //                countdownTimer = stepTime
                 _ = timer.connect()
@@ -54,5 +56,16 @@ struct ExerciseWarmupView: View {
                 _ = timer.connect().cancel()
             }
         }
+    }
+}
+
+struct ExerciseWarmupView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExerciseWarmupView(
+            name: "Warm-up",
+            advice: "Your advice here",
+            countdownTimer: 3599,
+            onTimerFinished: {})
+        .background(.gray)
     }
 }

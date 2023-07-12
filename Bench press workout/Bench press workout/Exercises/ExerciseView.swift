@@ -48,6 +48,7 @@ struct ExerciseView: View {
                                     viewModel.timerFinished()
                                 })
                                 .tag(index)
+                                .padding(.horizontal, screenWidth * 0.1)
 
                             Button(action: {
                                 viewModel.buttonTapped()

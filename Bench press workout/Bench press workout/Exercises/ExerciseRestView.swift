@@ -24,25 +24,25 @@ struct ExerciseRestView: View {
 
             VStack {
                 Text(name)
-                    .font(.system(size: screenHeight * 0.042))
+                    .font(.system(size: screenHeight * 0.06))
                     .textCase(.uppercase)
                     .foregroundColor(.white)
-                    .padding(.bottom, screenHeight * 0.08)
+                    .padding(.bottom, screenHeight * 0.16)
 
                 Spacer()
 
                 VStack {
                     Text(inform)
-                        .font(.system(size: screenHeight * 0.03))
+                        .font(.system(size: screenHeight * 0.045))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
-                        .padding(.bottom)
+                        .padding(.bottom, 0)
 
                     Text(FormatHandler.time(seconds: countdownTimer))
-                        .font(.system(size: screenHeight * 0.1))
-                        .textCase(.uppercase)
+                        .font(.system(size: screenHeight * 0.14))
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.bottom)
+                        .padding(.bottom, 0)
                         .onReceive(timer) { _ in
                             if countdownTimer > 0 {
                                 countdownTimer -= 1
@@ -52,12 +52,15 @@ struct ExerciseRestView: View {
                         }
 
                     Text(advice)
-                        .font(.system(size: screenHeight * 0.03))
+                        .font(.system(size: screenHeight * 0.045))
                         .foregroundColor(.white)
 
+                    Spacer()
+
                     Text(reminder)
-                        .font(.system(size: screenHeight * 0.03))
+                        .font(.system(size: screenHeight * 0.04))
                         .foregroundColor(.white)
+                        .padding(.bottom, 0)
                 }
                 .onAppear() {
 //                    countdownTimer = stepTime
@@ -66,10 +69,21 @@ struct ExerciseRestView: View {
                 .onDisappear() {
                     _ = timer.connect().cancel()
                 }
-
-                Spacer()
             }
-            .frame(width: screenWidth)
+            .frame(width: screenWidth, height: screenHeight)
         }
+    }
+}
+
+struct ExerciseRestView_Previews: PreviewProvider {
+    static var previews: some View {
+        ExerciseRestView(
+            name: "Rest",
+            inform: "Here is your inform.",
+            advice: "And your advice is here.",
+            countdownTimer: 360,
+            reminder: "It reminds you something",
+            onTimerFinished: {})
+        .background(.black)
     }
 }
