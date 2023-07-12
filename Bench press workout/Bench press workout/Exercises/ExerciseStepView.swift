@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct ExerciseStepView: View {
-    @State var exerciseName: String
-    @State var repetitions: Int
+    @State var attemptMessage: String
     @State var exerciseImage: String
-    @Binding var attempt: Int
-    @Binding var phase: ExercisePhase
-    @Binding var inform: String
-    @Binding var advice: String
-    @Binding var stepTime: Int
-    @Binding var reminder: String
+    @State var phase: ExercisePhase
+    @State var inform: String
+    @State var advice: String
+    @State var stepTime: Int
+    @State var reminder: String
+    @State var onTimerFinished: () -> Void
 
     var body: some View {
         GeometryReader { proxy in
@@ -24,49 +23,37 @@ struct ExerciseStepView: View {
             let screenHeight = proxy.size.height
 
             VStack {
-                AppImages.hitLogo
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: screenWidth * 0.3)
-                    .padding(.top, screenHeight * 0.04)
-                    .padding(.bottom, screenHeight * 0.024)
-
-                Text(exerciseName)
-                    .font(.system(size: screenHeight * 0.042))
-                    .fontWeight(.bold)
-                    .textCase(.uppercase)
-                    .foregroundColor(.white)
-                    .padding(.bottom, screenHeight * 0.016)
-
                 if phase == .warmup {
                     ExerciseWarmupView(
                         name: phase.rawValue,
                         advice: advice,
-                        countdownTimer: stepTime)
+                        countdownTimer: stepTime,
+                        onTimerFinished: onTimerFinished)
                 } else if phase == .attempt {
                     ExerciseAttemptView(
-                        name: phase.rawValue,
-                        repetitions: repetitions,
-                        exerciseImage: exerciseImage,
-                        attempt: $attempt)
+                        phaseName: phase.rawValue,
+                        attemptMessage: attemptMessage,
+                        exerciseImage: exerciseImage)
                 } else if phase == .rest {
                     ExerciseRestView(
                         name: phase.rawValue,
                         inform: inform,
                         advice: advice,
                         countdownTimer: stepTime,
-                        reminder: $reminder)
+                        reminder: reminder,
+                        onTimerFinished: onTimerFinished)
                 }
 
                 Spacer()
             }
             .frame(width: screenWidth, height: screenHeight)
+            .onAppear() {
+                printPhase(phase: phase)
+            }
         }
     }
-}
 
-//struct ExerciseStepView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseStepView()
-//    }
-//}
+    func printPhase(phase: ExercisePhase) {
+        print("carregou \(phase)")
+    }
+}

@@ -10,8 +10,10 @@ import SwiftUI
 struct ExerciseWarmupView: View {
     @State var name: String
     @State var advice: String
+    @State var stepTime: Int = 0
     @State var countdownTimer: Int
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 1, on: .main, in: .common)
+    @State var onTimerFinished: () -> Void
 
     var body: some View {
         GeometryReader { proxy in
@@ -33,6 +35,8 @@ struct ExerciseWarmupView: View {
                     .onReceive(timer) { _ in
                         if countdownTimer > 0 {
                             countdownTimer -= 1
+                        } else {
+                            onTimerFinished()
                         }
                     }
 
@@ -42,13 +46,13 @@ struct ExerciseWarmupView: View {
                     .padding(.bottom, screenHeight * 0.08)
             }
             .frame(width: screenWidth)
+            .onAppear() {
+//                countdownTimer = stepTime
+                _ = timer.connect()
+            }
+            .onDisappear() {
+                _ = timer.connect().cancel()
+            }
         }
     }
 }
-
-//struct ExerciseWarmupStepView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseWarmupView(name: "WARM-UP", advice: "EXAMPLE")
-//            .background(AppColors.exerciseBg)
-//    }
-//}

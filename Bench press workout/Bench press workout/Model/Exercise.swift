@@ -8,11 +8,12 @@
 import Foundation
 
 struct Exercise {
-    var id = UUID()
-    var name: String
-    var repetitions: Int
-    var imageName: String
-    var steps: [ExerciseStep] {
+    let id = UUID()
+    let name: String
+    let repetitions: Int
+    let imageName: String
+
+    lazy var steps: [ExerciseStep] = {
         var steps: [ExerciseStep] = []
 
         steps.append(ExerciseStep.warmupSample)
@@ -25,19 +26,16 @@ struct Exercise {
         }
 
         return steps
-    }
-
-    static let exerciseSample = Exercise(
-        name: "Bench Press (1RM)",
-        repetitions: 4,
-        imageName: AppImageStrings.benchPressHeavy
-    )
+    }()
 }
 
 struct ExerciseStep {
-    var id = UUID()
-    var phase: ExercisePhase
-    var time: Int {
+    let id = UUID()
+    let phase: ExercisePhase
+    let inform: String
+    let advice: String
+
+    var totalTime: Int {
         switch phase {
         case .warmup:
             return 600
@@ -47,26 +45,6 @@ struct ExerciseStep {
             return 180
         }
     }
-    var inform: String
-    var advice: String
-
-    static let warmupSample = ExerciseStep(
-        phase: .warmup,
-        inform: "",
-        advice: "The main goal is to find that perfect middle ground where you're warmed up enough, but still feeling energized and ready to go."
-    )
-
-    static let attemptSample = ExerciseStep(
-        phase: .attempt,
-        inform: "",
-        advice: ""
-    )
-
-    static let restSample = ExerciseStep(
-        phase: .rest,
-        inform: "Next attempt will start in",
-        advice: "Remember to breathe and rest."
-    )
 }
 
 enum ExercisePhase: String {

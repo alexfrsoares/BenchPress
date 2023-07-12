@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct ExerciseAttemptView: View {
-    @State var name: String
-    @State var repetitions: Int
+    @State var phaseName: String
+    @State var attemptMessage: String
     @State var exerciseImage: String
-    @Binding var attempt: Int
 
     var body: some View {
         GeometryReader { proxy in
@@ -19,7 +18,7 @@ struct ExerciseAttemptView: View {
             let screenHeight = proxy.size.height
 
             VStack {
-                Text("\(name) **\(attempt)/\(repetitions)**")
+                Text("\(phaseName) **\(attemptMessage)**")
                     .font(.system(size: screenHeight * 0.042))
                     .textCase(.uppercase)
                     .foregroundColor(.white)
@@ -31,12 +30,5 @@ struct ExerciseAttemptView: View {
                     .frame(width: screenWidth * 0.75)
             }
         }
-    }
-}
-
-struct ExerciseAttemptView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseAttemptView(name: "ATTEMPT", repetitions: 4, exerciseImage: AppImageStrings.benchPressHeavy, attempt: .constant(3))
-            .background(AppColors.exerciseBg)
     }
 }

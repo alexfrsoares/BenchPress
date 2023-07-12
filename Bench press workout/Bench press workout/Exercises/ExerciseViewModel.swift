@@ -7,77 +7,128 @@
 
 import SwiftUI
 
-extension Notification.Name {
-    static let startStepTimer = Notification.Name.init("StartStepTimer")
-}
-
 extension ExerciseView {
     @MainActor class ExerciseViewModel: ObservableObject {
-        var name = ""
-        var repetitions = 0
-        var imageName = ""
-        var steps: [ExerciseStep] = []
+        private var exercise: Exercise = Exercise.exerciseSample
 
-        @Published var currentIndex = 0
-        @Published var currentPhase: ExercisePhase = .warmup
-        @Published var stepInform = ""
-        @Published var stepAdvice = ""
-        @Published var remainingAttempts = 0
+        var exerciseName: String {
+            return exercise.name
+        }
+        var repetitions: Int {
+            return exercise.repetitions
+        }
+        var exerciseImageName: String {
+            return exercise.imageName
+        }
+        var steps: [ExerciseStep] {
+            return exercise.steps
+        }
+        var attemptSteps: [Int: Int] = [:]
+        var remainingAttemptsAtStep: [Int: Int] = [:]
+
+        @Published var currentStep = 0
         @Published var buttonDescription = ""
-        @Published var remainingAttemptsReminder = ""
-        @Published var currentTimer = 0
 
-        func setExerciseProperties(exercise: Exercise) {
-            self.name = exercise.name
-            self.repetitions = exercise.repetitions
-            self.imageName = exercise.imageName
-            self.steps = exercise.steps
-
-            self.remainingAttempts = repetitions
-            self.updateStepProperties()
-            self.updatePhaseProperties()
+        func setExerciseProperties() {
+            setAttemptInformations()
+            updateButtonLabel(currentPage: 0)
         }
 
-        func gotoTheNextStep() {
-//            withAnimation {
-                if self.currentIndex == self.steps.count - 1 {
-                    print("This is the exercise's end")
-                } else {
-                    self.currentIndex += 1
+        func setAttemptInformations() {
+            var attemptsCount = 1
+            var attemptsCountdown = repetitions - 1
+
+            for index in steps.indices {
+                if steps[index].phase == .attempt {
+                    attemptSteps[index] = attemptsCount
+                    attemptsCount += 1
+                    remainingAttemptsAtStep[index + 1] = attemptsCountdown
+                    attemptsCountdown -= 1
                 }
-//            }
-        }
-
-        func stepChanged() {
-            updateStepProperties()
-            updatePhaseProperties()
-        }
-
-        func updateStepProperties() {
-            self.currentTimer = steps[currentIndex].time
-            self.stepInform = steps[currentIndex].inform
-            self.stepAdvice = steps[currentIndex].advice
-        }
-
-        func updatePhaseProperties() {
-            self.currentPhase = steps[currentIndex].phase
-
-            switch currentPhase {
-                case .warmup:
-                    self.buttonDescription = "Start testing"
-                case .attempt:
-                    self.buttonDescription = "Done"
-                case .rest:
-                    self.buttonDescription = "Finish measurement"
-                    if self.remainingAttempts > 0 {
-                        self.remainingAttempts -= 1
-                        self.updateRemainingAttemptsReminder()
-                    }
             }
         }
 
-        func updateRemainingAttemptsReminder() {
-            self.remainingAttemptsReminder = "You still have \(remainingAttempts)/\(repetitions) attempts"
+        func getExercisePhase(stepIndex: Int) -> ExercisePhase {
+            return steps[stepIndex].phase
+        }
+
+        func getStepTotalTime(stepIndex: Int) -> Int {
+            return steps[stepIndex].totalTime
+        }
+
+        func getStepInform(stepIndex: Int) -> String {
+            return steps[stepIndex].inform
+        }
+
+        func getStepAdvice(stepIndex: Int) -> String {
+            return steps[stepIndex].advice
+        }
+
+        func getAttemptMessage(stepIndex: Int) -> String {
+            var message = ""
+
+            if steps[stepIndex].phase == .attempt {
+                let attempt = attemptSteps[stepIndex]
+
+                guard let currentAttempt = attempt else { return message }
+
+                if currentAttempt <= repetitions {
+                    message = "\(currentAttempt)/\(repetitions)"
+                    return message
+                }
+            }
+
+            return message
+        }
+
+        func getRemainingAttemptsMessage(stepIndex: Int) -> String {
+            var message = ""
+
+            if steps[stepIndex].phase == .rest {
+                let remaining = remainingAttemptsAtStep[stepIndex]
+
+                guard let remaining = remaining else { return message }
+                
+                if remaining > 0 {
+                    message = "You still have \(remaining)/\(repetitions) attempts"
+                    return message
+                }
+            }
+
+            return message
+        }
+
+        func buttonTapped(at step: Int) -> Int {
+            var move = 0
+                if step == steps.count - 1 {
+                    move -= step
+                    print("This is the exercise's end")
+                } else {
+                    move = 1
+                }
+
+            return step + move
+        }
+
+        func timerFinished(step: Int) {
+
+        }
+
+        func stepChanged(to page: Int) {
+            updateButtonLabel(currentPage: page)
+        }
+
+        func updateButtonLabel(currentPage: Int) {
+            let currentPhase = steps[currentPage].phase
+
+            switch currentPhase {
+                case .warmup:
+                    buttonDescription = "Start testing"
+                case .attempt:
+                    buttonDescription = "Done"
+                case .rest:
+                    buttonDescription = "Finish measurement"
+            }
         }
     }
 }

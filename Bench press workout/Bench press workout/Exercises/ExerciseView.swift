@@ -9,49 +9,66 @@ import SwiftUI
 
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
-    @State var exercise: Exercise = Exercise.exerciseSample
-    @State var currentIndex = 0
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var currentPage: Int = 0
 
     var body: some View {
         GeometryReader { proxy in
+            let screenWidth = proxy.size.width
+            let screenHeight = proxy.size.height
+
             VStack {
-                TabView(selection: $viewModel.currentIndex) {
+                TabView(selection: $currentPage) {
                     ForEach(
-                        Array(zip(viewModel.steps.indices, viewModel.steps)),
-                        id: \.0
-                    ) { index, step in
+                        0..<viewModel.steps.count,
+                        id: \.self
+                    ) { index in
                         VStack {
-                            ExerciseStepView(exerciseName: viewModel.name,
-                                             repetitions: viewModel.repetitions,
-                                             exerciseImage: viewModel.imageName,
-                                             attempt: $viewModel.remainingAttempts,
-                                             phase: $viewModel.currentPhase,
-                                             inform: $viewModel.stepInform,
-                                             advice: $viewModel.stepAdvice,
-                                             stepTime: $viewModel.currentTimer,
-                                             reminder: $viewModel.remainingAttemptsReminder)
+                            AppImages.hitLogo
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: screenWidth * 0.3)
+                                .padding(.top, screenHeight * 0.04)
+                                .padding(.bottom, screenHeight * 0.024)
+
+                            Text(viewModel.exerciseName)
+                                .font(.system(size: screenHeight * 0.042))
+                                .fontWeight(.bold)
+                                .textCase(.uppercase)
+                                .foregroundColor(.white)
+                                .padding(.bottom, screenHeight * 0.016)
+                            
+                            ExerciseStepView(attemptMessage: viewModel.getAttemptMessage(stepIndex: index),
+                                             exerciseImage: viewModel.exerciseImageName,
+                                             phase: viewModel.getExercisePhase(stepIndex: index),
+                                             inform: viewModel.getStepInform(stepIndex: index),
+                                             advice: viewModel.getStepAdvice(stepIndex: index),
+                                             stepTime: viewModel.getStepTotalTime(stepIndex: index),
+                                             reminder: viewModel.getRemainingAttemptsMessage(stepIndex: index),
+                                             onTimerFinished: {
+                                                currentPage = viewModel.buttonTapped(at: currentPage)
+                                             })
                                 .tag(index)
+
+                            Button(action: {
+                                currentPage = viewModel.buttonTapped(at: currentPage)
+                            }, label: {
+                                ContinueButtonView(description: $viewModel.buttonDescription)
+                                    .padding()
+                            })
                         }
                     }
                 }
+                .animation(.easeInOut, value: currentPage)
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .tabViewStyle(PageTabViewStyle())
                 .onAppear {
-                    viewModel.setExerciseProperties(exercise: exercise)
+                    viewModel.setExerciseProperties()
                 }
-                .onChange(of: viewModel.currentIndex) { _ in
+                .onChange(of: currentPage) { _ in
                     withAnimation {
-                        viewModel.stepChanged()
+                        viewModel.stepChanged(to: currentPage)
                     }
                 }
-
-                Button(action: {
-                    viewModel.gotoTheNextStep()
-                }, label: {
-                    ContinueButtonView(description: $viewModel.buttonDescription)
-                        .padding()
-                })
             }
         }
         .background {

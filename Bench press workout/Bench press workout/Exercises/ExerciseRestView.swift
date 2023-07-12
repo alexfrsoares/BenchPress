@@ -11,9 +11,11 @@ struct ExerciseRestView: View {
     @State var name: String
     @State var inform: String
     @State var advice: String
+    @State var stepTime: Int = 0
     @State var countdownTimer: Int
-    @Binding var reminder: String
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var reminder: String
+    let timer = Timer.publish(every: 1, on: .main, in: .common)
+    @State var onTimerFinished: () -> Void
 
     var body: some View {
         GeometryReader { proxy in
@@ -44,6 +46,8 @@ struct ExerciseRestView: View {
                         .onReceive(timer) { _ in
                             if countdownTimer > 0 {
                                 countdownTimer -= 1
+                            } else {
+                                onTimerFinished()
                             }
                         }
 
@@ -55,6 +59,13 @@ struct ExerciseRestView: View {
                         .font(.system(size: screenHeight * 0.03))
                         .foregroundColor(.white)
                 }
+                .onAppear() {
+//                    countdownTimer = stepTime
+                    _ = timer.connect()
+                }
+                .onDisappear() {
+                    _ = timer.connect().cancel()
+                }
 
                 Spacer()
             }
@@ -62,10 +73,3 @@ struct ExerciseRestView: View {
         }
     }
 }
-
-//struct ExerciseRestView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ExerciseRestView(name: "REST", inform: "will start in", advice: "breathe and rest", reminder: .constant("You still have 3/4 attempts"))
-//            .background(AppColors.exerciseBg)
-//    }
-//}
