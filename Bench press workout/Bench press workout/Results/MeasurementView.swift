@@ -16,7 +16,6 @@ struct MeasurementView: View {
         NavigationView {
             GeometryReader { proxy in
                 let screenWidth = proxy.size.width
-                let screenHeight = proxy.size.height
 
                 VStack(alignment: .leading) {
                     HStack(alignment: .top) {
