@@ -21,16 +21,16 @@ struct ExerciseWarmupView: View {
 
             VStack(alignment: .center) {
                 Text(name)
-                    .font(.system(size: screenHeight * 0.06))
+                    .font(.system(size: 32))
                     .textCase(.uppercase)
                     .foregroundColor(.white)
                     .padding(.bottom, screenHeight * 0.16)
 
                 Text(FormatHandler.time(seconds: countdownTimer))
-                    .font(.system(size: screenHeight * 0.14))
+                    .font(.system(size: 80))
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .padding(.bottom)
+                    .padding(.bottom, 0)
                     .onReceive(timer) { _ in
                         if countdownTimer > 0 {
                             countdownTimer -= 1
@@ -40,7 +40,7 @@ struct ExerciseWarmupView: View {
                     }
 
                 Text(advice)
-                    .font(.system(size: screenHeight * 0.04))
+                    .font(.system(size: 22))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
 
