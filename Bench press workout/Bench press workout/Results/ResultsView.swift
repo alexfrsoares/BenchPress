@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ResultsView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var viewModel = ResultsViewModel()
     @State var maxWeight: String
     @State var repetitions: String
     @State var user1RM: String = ""
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         NavigationView {

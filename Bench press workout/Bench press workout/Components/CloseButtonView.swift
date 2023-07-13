@@ -22,9 +22,7 @@ struct CloseButtonView: View {
 
 struct CloseButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        CloseButtonView(action: {
-
-        })
+        CloseButtonView(action: { })
         .background(AppColors.exerciseBg)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         NavigationView {
@@ -52,7 +53,12 @@ struct ExerciseView: View {
                                 .padding(.horizontal, screenWidth * 0.1)
 
                                 if viewModel.getExercisePhase(stepIndex: index) == .rest {
-                                    NavigationLink(destination: ResultsView(maxWeight: "", repetitions: "")) {
+                                    NavigationLink(destination: ResultsView(maxWeight: "", repetitions: "").navigationBarBackButtonHidden(true)) {
+                                        ContinueButtonView(description: viewModel.buttonDescription)
+                                    }
+                                    .padding()
+                                } else if (viewModel.currentStep == viewModel.steps.count - 1) {
+                                    NavigationLink(destination: MeasurementView().navigationBarBackButtonHidden(true)) {
                                         ContinueButtonView(description: viewModel.buttonDescription)
                                     }
                                     .padding()

@@ -24,7 +24,7 @@ struct OnboardingView: View {
                 .tabViewStyle(PageTabViewStyle())
 
                 if viewModel.currentIndex == steps.count - 1 {
-                    NavigationLink(destination: ExerciseView()) {
+                    NavigationLink(destination: ExerciseView().navigationBarBackButtonHidden(true)) {
                         ContinueButtonView(description: "Let's squat")
                     }
                     .padding()

@@ -10,6 +10,7 @@ import SwiftUI
 struct MeasurementView: View {
     @State private var maxWeight: String = ""
     @State private var repetitions: String = ""
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         NavigationView {
@@ -25,12 +26,11 @@ struct MeasurementView: View {
                             .multilineTextAlignment(.leading)
                             .foregroundColor(.white)
                             .frame(maxWidth: screenWidth * 0.45)
-//                        .padding(.leading, 0)
-//                        .padding(.bottom)
+                        
                         Spacer()
-//                        .frame()
-                        CloseButtonView(action: {
 
+                        CloseButtonView(action: {
+                            presentationMode.wrappedValue.dismiss()
                         })
                     }
 
@@ -45,12 +45,14 @@ struct MeasurementView: View {
                             Text("Maximum lifted weight")
                                 .foregroundColor(.white)
                             TextField("KG", text: $maxWeight)
+                                .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
 
                             Text("Number of repetitions with that weight")
                                 .foregroundColor(.white)
                                 .padding(.top)
                             TextField("", text: $repetitions)
+                                .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
                         }
                         .formStyle(.columns)
@@ -79,6 +81,7 @@ struct MeasurementView: View {
                     .overlay(resultsOverlay)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 
     private var resultsOverlay: some View {
