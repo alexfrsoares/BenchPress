@@ -26,12 +26,12 @@ struct ExerciseView: View {
                                 AppImages.hitLogo
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: screenWidth * 0.3)
+                                    .frame(width: 110)
                                     .padding(.top, screenHeight * 0.04)
                                     .padding(.bottom, screenHeight * 0.024)
 
                                 Text(viewModel.exerciseName)
-                                    .font(.system(size: screenHeight * 0.042))
+                                    .font(.system(size: 32))
                                     .fontWeight(.bold)
                                     .textCase(.uppercase)
                                     .foregroundColor(.white)
@@ -51,12 +51,7 @@ struct ExerciseView: View {
                                 .tag(index)
                                 .padding(.horizontal, screenWidth * 0.1)
 
-                                if viewModel.getExercisePhase(stepIndex: index) == .rest {
-                                    NavigationLink(destination: ResultsView(maxWeight: "", repetitions: "").navigationBarBackButtonHidden(true)) {
-                                        ContinueButtonView(description: viewModel.buttonDescription)
-                                    }
-                                    .padding()
-                                } else if (viewModel.currentStep == viewModel.steps.count - 1) {
+                                if viewModel.getExercisePhase(stepIndex: index) == .rest || viewModel.currentStep == viewModel.steps.count - 1 {
                                     NavigationLink(destination: MeasurementView().navigationBarBackButtonHidden(true)) {
                                         ContinueButtonView(description: viewModel.buttonDescription)
                                     }

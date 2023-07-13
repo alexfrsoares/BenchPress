@@ -21,7 +21,7 @@ struct MeasurementView: View {
                 VStack(alignment: .leading) {
                     HStack(alignment: .top) {
                         Text("After you have completed your assessment.")
-                            .font(.system(size: screenHeight * 0.03))
+                            .font(.system(size: 22))
                             .fontWeight(.bold)
                             .multilineTextAlignment(.leading)
                             .foregroundColor(.white)
@@ -36,7 +36,7 @@ struct MeasurementView: View {
 
                     VStack(alignment: .leading) {
                         Text("Tell us your number!")
-                            .font(.system(size: screenHeight * 0.03))
+                            .font(.system(size: 22))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
                             .padding()
@@ -54,9 +54,10 @@ struct MeasurementView: View {
                             TextField("", text: $repetitions)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
+                                .padding(.bottom)
                         }
                         .formStyle(.columns)
-                        .padding()
+                        .padding(.horizontal)
                     }
                     .background(AppColors.exerciseBg)
                     .cornerRadius(10)
