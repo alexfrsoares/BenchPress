@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExerciseView: View {
     @ObservedObject var viewModel = ExerciseViewModel()
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         NavigationView {
@@ -78,6 +77,7 @@ struct ExerciseView: View {
                     .tabViewStyle(.page(indexDisplayMode: .never))
                     .tabViewStyle(PageTabViewStyle())
                     .onAppear {
+                        print(viewModel.currentStep)
                         viewModel.setExerciseProperties()
                     }
                     .onChange(of: viewModel.currentStep) { _ in

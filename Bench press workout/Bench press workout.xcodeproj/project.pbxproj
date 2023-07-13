@@ -107,10 +107,10 @@
 			children = (
 				928DB6E22A5812E000FF4238 /* Bench_press_workoutApp.swift */,
 				928DB6E42A5812E000FF4238 /* ContentView.swift */,
+				928DB6F62A59D56C00FF4238 /* Model */,
 				928DB7052A5A405900FF4238 /* Onboarding */,
 				928DB70C2A5B80B200FF4238 /* Exercises */,
 				92EB92702A5EFEE600FCCF96 /* Results */,
-				928DB6F62A59D56C00FF4238 /* Model */,
 				928DB6FB2A5A2F1D00FF4238 /* Components */,
 				928DB6FE2A5A3A3000FF4238 /* Resources */,
 				928DB6E82A5812E200FF4238 /* Preview Content */,
