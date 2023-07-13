@@ -28,7 +28,9 @@ struct MeasurementView: View {
 //                        .padding(.bottom)
                     Spacer()
 //                        .frame()
-                    AppImages.closeButton
+                    CloseButtonView(action: {
+
+                    })
                 }
 
                 VStack(alignment: .leading) {
@@ -58,12 +60,13 @@ struct MeasurementView: View {
 
                 Spacer()
 
-                Button(action: {
-                    print("I'm here!")
-                }, label: {
-                    ContinueButtonView(description: .constant("Continue"))
-                        .padding()
-                })
+                ContinueButtonView(
+                    description: .constant("Continue"),
+                    action: {
+                        print("I'm here!")
+                    }
+                )
+                .padding()
             }
             .padding()
         }

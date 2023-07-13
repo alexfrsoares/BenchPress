@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ContinueButtonView: View {
     @Binding var description: String
+    let action: () -> Void
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 4.0)
-                .foregroundColor(AppColors.button)
-            Text(description)
-                .foregroundColor(.white)
-                .fontWeight(.bold)
-        }
+        Button(action: action, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 4.0)
+                    .foregroundColor(AppColors.button)
+                Text(description)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+            }
+        })
         .frame(height: 47)
     }
 }

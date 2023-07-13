@@ -50,12 +50,13 @@ struct ExerciseView: View {
                                 .tag(index)
                                 .padding(.horizontal, screenWidth * 0.1)
 
-                            Button(action: {
-                                viewModel.buttonTapped()
-                            }, label: {
-                                ContinueButtonView(description: $viewModel.buttonDescription)
-                                    .padding()
-                            })
+                            ContinueButtonView(
+                                description: $viewModel.buttonDescription,
+                                action: {
+                                    viewModel.buttonTapped()
+                                }
+                            )
+                            .padding()
                         }
                     }
                 }
