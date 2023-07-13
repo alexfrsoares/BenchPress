@@ -12,24 +12,33 @@ struct OnboardingView: View {
     @State var steps: [OnboardingStep] = OnboardingStep.stepSamples
 
     var body: some View {
-        VStack {
-            TabView(selection: $viewModel.currentIndex) {
-                ForEach(Array(zip(steps.indices, steps)), id: \.0) { index, step in
-                    OnboardingStepView(step: step)
-                        .tag(index)
+        NavigationView {
+            VStack {
+                TabView(selection: $viewModel.currentIndex) {
+                    ForEach(Array(zip(steps.indices, steps)), id: \.0) { index, step in
+                        OnboardingStepView(step: step)
+                            .tag(index)
+                    }
+                }
+                .tabViewStyle(.page(indexDisplayMode: .always))
+                .tabViewStyle(PageTabViewStyle())
+
+                if viewModel.currentIndex == steps.count - 1 {
+                    NavigationLink(destination: ExerciseView()) {
+                        ContinueButtonView(description: "Let's squat")
+                    }
+                    .padding()
+                } else {
+                    ContinueButton(
+                        description: $viewModel.buttonDescription,
+                        action: {
+                            viewModel.gotoTheNextStep(totalSteps: steps.count)
+                        }
+                    )
+                    .padding()
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .always))
-            .tabViewStyle(PageTabViewStyle())
-
-            ContinueButtonView(
-                description: $viewModel.buttonDescription,
-                action: {
-                    viewModel.gotoTheNextStep(totalSteps: steps.count)
-                }
-            )
-            .padding()
+            .background(AppColors.onboardingBg)
         }
-        .background(AppColors.onboardingBg)
     }
 }
