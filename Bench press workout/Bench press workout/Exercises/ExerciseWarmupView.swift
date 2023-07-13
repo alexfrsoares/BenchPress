@@ -10,7 +10,6 @@ import SwiftUI
 struct ExerciseWarmupView: View {
     @State var name: String
     @State var advice: String
-    @State var stepTime: Int = 0
     @State var countdownTimer: Int
     let timer = Timer.publish(every: 1, on: .main, in: .common)
     @State var onTimerFinished: () -> Void
@@ -49,7 +48,6 @@ struct ExerciseWarmupView: View {
             }
             .frame(width: screenWidth, height: screenHeight)
             .onAppear() {
-//                countdownTimer = stepTime
                 _ = timer.connect()
             }
             .onDisappear() {

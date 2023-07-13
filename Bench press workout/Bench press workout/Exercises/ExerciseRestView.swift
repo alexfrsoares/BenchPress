@@ -11,7 +11,6 @@ struct ExerciseRestView: View {
     @State var name: String
     @State var inform: String
     @State var advice: String
-    @State var stepTime: Int = 0
     @State var countdownTimer: Int
     @State var reminder: String
     let timer = Timer.publish(every: 1, on: .main, in: .common)
@@ -63,7 +62,6 @@ struct ExerciseRestView: View {
                         .padding(.bottom, 0)
                 }
                 .onAppear() {
-//                    countdownTimer = stepTime
                     _ = timer.connect()
                 }
                 .onDisappear() {

@@ -14,13 +14,13 @@ extension OnboardingView {
 
         func gotoTheNextStep(totalSteps: Int) {
             withAnimation {
-                if self.currentIndex == totalSteps - 1 {
+                if currentIndex == totalSteps - 1 {
                     print("This is the onboarding's end")
                 } else {
-                    if self.currentIndex == totalSteps - 2 {
-                        self.buttonDescription = "Let's Squat"
+                    if currentIndex == totalSteps - 2 {
+                        buttonDescription = "Let's Squat"
                     }
-                    self.currentIndex += 1
+                    currentIndex += 1
                 }
             }
         }

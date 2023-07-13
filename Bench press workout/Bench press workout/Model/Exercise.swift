@@ -38,11 +38,11 @@ struct ExerciseStep {
     var totalTime: Int {
         switch phase {
         case .warmup:
-            return 600
+            return 5
         case .attempt:
             return 0
         case .rest:
-            return 180
+            return 5
         }
     }
 }
